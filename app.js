@@ -178,7 +178,8 @@ function updateScore(){
   scoreEl.textContent = 'Player: ' + playerScore;
   for (let i=0;i<aiSnakes.length;i++){
     const aiEl = document.getElementById('aiScore'+i);
-    if (aiEl) aiEl.textContent = 'AI '+(i+1)+': '+(aiSnakes[i].score||0);
+    const aiName = i === 0 ? 'Emily' : 'AI '+(i+1);
+    if (aiEl) aiEl.textContent = aiName+': '+(aiSnakes[i].score||0);
   }
   updateLeaderboard();
 }
