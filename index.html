@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Snake</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>Snake</h1>
+    <div class="layout">
+      <div class="main">
+        <div class="hud">
+          <div id="score">Player: 0</div>
+          <div id="aiScore0">AI 1: 0</div>
+          <div id="aiScore1">AI 2: 0</div>
+          <div id="aiScore2">AI 3: 0</div>
+          <button id="restart">Restart</button>
+        </div>
+        <canvas id="game" width="1200" height="800" tabindex="0"></canvas>
+        <p class="hint">Use arrow keys or WASD to move. If the snake's head touches its body, you die.</p>
+      </div>
+
+      <aside class="settings">
+        <h3>Settings</h3>
+        <div class="form-row">
+          <label for="foodCount">Food count</label>
+          <input id="foodCount" type="number" min="1" max="20" value="1">
+        </div>
+        <p class="muted">Adjust how many food items spawn on the map.</p>
+        <div class="leaderboard">
+          <h3>Leaderboard</h3>
+          <ol id="leaderList" class="leader-list">
+            <li data-id="player">Player — <span class="lscore" id="leaderPlayer">0</span></li>
+            <li data-id="ai0">AI 1 — <span class="lscore" id="leaderAI0">0</span></li>
+            <li data-id="ai1">AI 2 — <span class="lscore" id="leaderAI1">0</span></li>
+            <li data-id="ai2">AI 3 — <span class="lscore" id="leaderAI2">0</span></li>
+          </ol>
+        </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
