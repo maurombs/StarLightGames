@@ -18,8 +18,16 @@
           <div id="aiScore2">AI 3: 0</div>
           <button id="restart">Restart</button>
         </div>
-        <canvas id="game" width="1200" height="800" tabindex="0"></canvas>
-        <p class="hint">Use arrow keys or WASD to move. If the snake's head touches its body, you die.</p>
+        <div class="canvas-wrap">
+          <canvas id="game" width="1200" height="800" tabindex="0"></canvas>
+          <div class="dpad" aria-label="Directional controls">
+            <button class="dpad-btn" id="dpad-up"   aria-label="Up">▲</button>
+            <button class="dpad-btn" id="dpad-left"  aria-label="Left">◀</button>
+            <button class="dpad-btn" id="dpad-right" aria-label="Right">▶</button>
+            <button class="dpad-btn" id="dpad-down"  aria-label="Down">▼</button>
+          </div>
+        </div>
+        <p class="hint">Use arrow keys or WASD to steer. On touch: tap where you want to go, or use the D-pad.</p>
       </div>
 
       <aside class="settings">

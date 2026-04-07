@@ -25,3 +25,22 @@ button{background:linear-gradient(90deg,#7b2ff7,#2dd4bf);color:white;border:none
 .leader-list li{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
 .leader-list li:last-child{border-bottom:none}
 .leader-list .lscore{font-weight:800;color:#ffd166}
+
+/* canvas wrapper for D-pad overlay */
+.canvas-wrap{position:relative}
+
+/* D-pad: hidden by default, shown on touch devices */
+.dpad{display:none;position:absolute;bottom:16px;left:16px;width:132px;height:132px;grid-template-areas:". up ." "left . right" ". down .";grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:6px;z-index:10}
+.dpad-btn{background:rgba(123,47,247,0.55);border:2px solid rgba(255,255,255,0.18);color:#fff;border-radius:10px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;touch-action:none;user-select:none}
+.dpad-btn:active{background:rgba(45,212,191,0.7)}
+#dpad-up   {grid-area:up}
+#dpad-left {grid-area:left}
+#dpad-right{grid-area:right}
+#dpad-down {grid-area:down}
+@media (pointer:coarse){.dpad{display:grid}}
+
+/* responsive layout: stack on narrow screens */
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .wrap{width:100%;max-width:100%;padding:8px}
+}

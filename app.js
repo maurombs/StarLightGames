@@ -597,6 +597,43 @@ restartBtn.addEventListener('click', ()=> reset());
 // focus canvas to receive keyboard events on some browsers
 canvas.addEventListener('click', ()=> canvas.focus());
 
+// Touch-to-steer: point finger at where you want the snake to go
+function handleCanvasTouch(e){
+  e.preventDefault();
+  const touch = e.touches[0];
+  if (!touch || !snake || !snake.length) return;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const touchX = (touch.clientX - rect.left) * scaleX;
+  const touchY = (touch.clientY - rect.top) * scaleY;
+  const head = snake[0];
+  const headPx = head.x * CELL_W;
+  const headPy = head.y * CELL_H;
+  const dx = touchX - headPx;
+  const dy = touchY - headPy;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  if (dist < 15) return; // too close to head, ignore
+  const desired = Math.atan2(dy, dx);
+  // prevent reversing into self
+  if (snake.length > 1){
+    const curX = Math.cos(playerAngle), curY = Math.sin(playerAngle);
+    if ((dx/dist * curX + dy/dist * curY) < -0.5) return;
+  }
+  playerDesiredAngle = desired;
+}
+canvas.addEventListener('touchstart', handleCanvasTouch, {passive: false});
+canvas.addEventListener('touchmove', handleCanvasTouch, {passive: false});
+
+// D-pad touch controls
+[['dpad-up','up'],['dpad-down','down'],['dpad-left','left'],['dpad-right','right']].forEach(([id, key]) => {
+  const btn = document.getElementById(id);
+  if (!btn) return;
+  btn.addEventListener('touchstart', e => { e.preventDefault(); keyState[key] = true; computeNextDirFromKeys(); }, {passive: false});
+  btn.addEventListener('touchend',   e => { e.preventDefault(); keyState[key] = false; computeNextDirFromKeys(); }, {passive: false});
+  btn.addEventListener('touchcancel',e => { e.preventDefault(); keyState[key] = false; computeNextDirFromKeys(); }, {passive: false});
+});
+
 // settings: foodCount control
 const foodInput = document.getElementById('foodCount');
 if (foodInput){
